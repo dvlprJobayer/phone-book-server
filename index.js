@@ -25,6 +25,12 @@ async function run() {
             const result = await phoneBookCollection.insertOne(contact);
             res.send(result);
         });
+
+        // Get Api
+        app.get('/all-contact', async (req, res) => {
+            const result = await phoneBookCollection.find().toArray();
+            res.send(result);
+        });
     }
     finally { }
 }

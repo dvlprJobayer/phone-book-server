@@ -17,7 +17,14 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     try {
         await client.connect();
-        console.log("db connected");
+        const phoneBookCollection = client.db("phone-book").collection("all-contact");
+
+        // Post Api
+        app.post('/add-contact', async (req, res) => {
+            const contact = req.body;
+            const result = await phoneBookCollection.insertOne(contact);
+            res.send(result);
+        });
     }
     finally { }
 }

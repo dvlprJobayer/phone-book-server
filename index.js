@@ -31,6 +31,13 @@ async function run() {
             const result = await phoneBookCollection.find().toArray();
             res.send(result);
         });
+
+        // Delete Api
+        app.delete('/delete-contact/:id', async (req, res) => {
+            const { id } = req.params;
+            const result = await phoneBookCollection.deleteOne({ _id: ObjectId(id) });
+            res.send(result);
+        });
     }
     finally { }
 }

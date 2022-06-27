@@ -32,6 +32,18 @@ async function run() {
             res.send(result);
         });
 
+        // Update Api
+        app.patch('/edit-contact/:id', async (req, res) => {
+            const { id } = req.params;
+            const contact = req.body;
+            const filter = { _id: ObjectId(id) };
+            const updateDoc = {
+                $set: contact
+            };
+            const result = await phoneBookCollection.updateOne(filter, updateDoc);
+            res.send(result);
+        });
+
         // Delete Api
         app.delete('/delete-contact/:id', async (req, res) => {
             const { id } = req.params;

@@ -28,7 +28,7 @@ async function run() {
 
         // Get Api
         app.get('/all-contact', async (req, res) => {
-            const result = await phoneBookCollection.find().toArray();
+            const result = await phoneBookCollection.find().sort({ "_id": -1 }).toArray();
             res.send(result);
         });
 
